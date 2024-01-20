@@ -22,7 +22,7 @@ spec:
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+      - name: regcred
       {{- end }}
       serviceAccountName: {{ include "espresso-review.serviceAccountName" . }}
       securityContext:
@@ -33,18 +33,24 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: reviewconfig
+            valueFrom:
+              configMapKeyRef:
+                name: reviewconfig
+                key: SERVICE_VERSION
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

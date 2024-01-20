@@ -46,6 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "espresso-web.selectorLabels" -}}
+version: v1
 app.kubernetes.io/name: {{ include "espresso-web.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

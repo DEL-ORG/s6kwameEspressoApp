@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "espresso-review.fullname" . }}
+  name: espresso-shop-reviews-svc
   labels:
     {{- include "espresso-review.labels" . | nindent 4 }}
 spec:
@@ -13,3 +13,4 @@ spec:
       name: http
   selector:
     {{- include "espresso-review.selectorLabels" . | nindent 4 }}
+

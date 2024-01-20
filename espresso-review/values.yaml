@@ -4,13 +4,17 @@
 
 replicaCount: 1
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+app_name: 
+  review1: espressoreview1
+  
 
-imagePullSecrets: []
+image:
+  repository: devopseasylearning/s6-expresso-reviews
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.0"
+
+imagePullSecrets: [regcred]
 nameOverride: ""
 fullnameOverride: ""
 
@@ -22,6 +26,7 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+  name1: review2
 
 podAnnotations: {}
 
@@ -37,8 +42,10 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  name: espresso-shop-reviews-svc
+  type: NodePort
+  port: 8092
+  containerPort: 80
 
 ingress:
   enabled: false
@@ -56,20 +63,20 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+resources: 
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+   limits:
+     cpu: 100m
+     memory: 128Mi
+   requests:
+     cpu: 100m
+     memory: 128Mi
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
