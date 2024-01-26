@@ -33,9 +33,22 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "espresso-review.labels" -}}
+{{- define "espresso-review.labels_01" -}}
 helm.sh/chart: {{ include "espresso-review.chart" . }}
-{{ include "espresso-review.selectorLabels" . }}
+{{ include "espresso-review.selectorLabels_01" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+
+{{/*
+Common labels
+*/}}
+{{- define "espresso-review.labels_02" -}}
+helm.sh/chart: {{ include "espresso-review.chart" . }}
+{{ include "espresso-review.selectorLabels_02" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,8 +59,18 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "espresso-review.selectorLabels" -}}
+{{- define "espresso-review.selectorLabels_01" -}}
 version: v1
+app.kubernetes.io/name: {{ include "espresso-review.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+
+{{/*
+Selector labels
+*/}}
+{{- define "espresso-review.selectorLabels_02" -}}
+version: v2
 app.kubernetes.io/name: {{ include "espresso-review.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

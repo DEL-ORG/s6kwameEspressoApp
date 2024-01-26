@@ -14,6 +14,8 @@ imagePullSecrets: [regcred]
 nameOverride: ""
 fullnameOverride: ""
 
+
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -82,3 +84,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+data:
+  username: "c2VudGluZWwtcGFzc3dvcmQ=" # base64-encoded "admin"
+  password: "bXlyZWRpc3Bhc3N3b3Jk"   # base64-encoded "1f2d1e2e67df"

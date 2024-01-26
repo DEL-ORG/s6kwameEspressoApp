@@ -33,6 +33,22 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: catalogconfig
+              valueFrom:
+                configMapKeyRef:
+                  name: catalogconfig
+                  key: username
+            - name: reviewconfig
+              valueFrom:
+                configMapKeyRef:
+                  name: catalogconfig
+                  key: password
+            - name: reviewconfig
+              valueFrom:
+                configMapKeyRef:
+                  name: catalogconfig
+                  key: database
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}

@@ -33,17 +33,25 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - secretRef:
+              name: {{ include "espresso-web.fullname" . }}
           env:
           - name: ProductCatalogUrl
             valueFrom:
               configMapKeyRef:
-                name: webconfig
+                name: {{ include "espresso-web.fullname" . }}
                 key: ProductCatalogUrl
           - name: ReviewsUrl
             valueFrom:
               configMapKeyRef:
-                name: webconfig
+                name: {{ include "espresso-web.fullname" . }}
                 key: ReviewsUrl
+          - name: RedisUrl
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "espresso-web.fullname" . }}
+                key: redisUrl
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}
