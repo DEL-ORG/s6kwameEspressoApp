@@ -11,4 +11,4 @@ In order to access the server UI you have the following options:
 
 After reaching the UI the first time you can login with username: admin and the random password generated during the installation. You can find the password by running:
 
-kubectl -n s6kwame get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+kubectl -n s6kwame get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
