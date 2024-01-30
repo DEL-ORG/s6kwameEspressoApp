@@ -1,14 +1,24 @@
-In order to access the server UI you have the following options:
 
-1. kubectl port-forward service/argo-cd-argocd-server -n s6kwame 8080:443
+** Please be patient while the chart is being deployed **
 
-    and then open the browser on http://localhost:8080 and accept the certificate
+1. Access your Argo CD installation:
+  Execute the following commands:
+  export NODE_PORT=$(kubectl get --namespace s6kwame -o jsonpath="{.spec.ports[0].nodePort}" services argo-cd-argocd-server)
+  export NODE_IP=$(kubectl get nodes --namespace s6kwame -o jsonpath="{.items[0].status.addresses[0].address}")
+  export URL="http://${NODE_IP}:${NODE_PORT}/"
+  echo "Argo CD URL: http://$NODE_IP:$NODE_PORT/"
 
-2. enable ingress in the values file `server.ingress.enabled` and either
-      - Add the annotation for ssl passthrough: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-1-ssl-passthrough
-      - Set the `configs.params."server.insecure"` in the values file and terminate SSL at your ingress: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts
+2. Execute the following commands to obtain the Argo CD credentials:
 
-
+  echo "Username: \"admin\""
+  echo "Password: $(kubectl -n s6kwame get secret argocd-secret -o jsonpath="{.data.clearPassword}" | base64 -d)"
 After reaching the UI the first time you can login with username: admin and the random password generated during the installation. You can find the password by running:
 
 kubectl -n s6kwame get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+
+kubectl expose svc argo-cd-argocd-server --type=NodePort --target-port=9090 --name=argo-cd-argocd-server-ext  
+
+Powershell script to decode base64 string
+$base64String = 'OUFWVWx4czgza0Y5dEk1TA=='
+$decodedString = [System.Text.Encoding]::Utf8.GetString([System.Convert]::FromBase64String($base64String))
+Write-Output $decodedString
