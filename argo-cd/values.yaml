@@ -245,7 +245,7 @@ controller:
   ## Application controller metrics configuration
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     applicationLabels:
       # -- Enables additional labels in argocd_app_labels metric
       enabled: false
@@ -373,7 +373,7 @@ dex:
 
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- Metrics service annotations
       annotations: {}
@@ -700,7 +700,7 @@ redis:
 
   metrics:
     # -- Deploy metrics service and redis-exporter sidecar
-    enabled: false
+    enabled: true
     image:
       # -- redis-exporter image repository
       repository: bitnami/redis-exporter
@@ -1032,7 +1032,7 @@ server:
   ## Server metrics service configuration
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- Metrics service annotations
       annotations: {}
@@ -1615,7 +1615,7 @@ repoServer:
   ## Repo server metrics service configuration
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- Metrics service annotations
       annotations: {}
@@ -1978,7 +1978,7 @@ applicationSet:
   ## Metrics service configuration
   metrics:
     # -- Deploy metrics service
-    enabled: false
+    enabled: true
     service:
       # -- Metrics service annotations
       annotations: {}
@@ -2239,7 +2239,7 @@ notifications:
 
   metrics:
     # -- Enables prometheus metrics server
-    enabled: false
+    enabled: true
     # -- Metrics port
     port: 9001
     service:
