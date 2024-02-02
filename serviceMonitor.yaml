@@ -11,9 +11,9 @@ spec:
   endpoints:
   - port: http-metrics
 
-  ---
+---
 
-  apiVersion: monitoring.coreos.com/v1
+apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: argocd-server-metrics
@@ -26,9 +26,9 @@ spec:
   endpoints:
   - port: http-metrics
 
-  ---
+---
 
-  apiVersion: monitoring.coreos.com/v1
+apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: argocd-repo-server-metrics
@@ -41,9 +41,9 @@ spec:
   endpoints:
   - port: http-metrics
 
-  ---
+---
 
-  apiVersion: monitoring.coreos.com/v1
+apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: argocd-applicationset-controller-metrics

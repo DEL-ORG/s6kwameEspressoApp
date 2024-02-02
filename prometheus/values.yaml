@@ -60,7 +60,7 @@ configmapReload:
     ##
     image:
       repository: quay.io/prometheus-operator/prometheus-config-reloader
-      tag: v0.70.0
+      tag: v0.71.2
       # When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
       digest: ""
       pullPolicy: IfNotPresent
@@ -454,7 +454,7 @@ server:
 
     ## Prometheus server data Persistent Volume size
     ##
-    size: 2Gi
+    size: 8Gi
 
     ## Prometheus server data Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
@@ -665,7 +665,7 @@ server:
     loadBalancerSourceRanges: []
     servicePort: 80
     sessionAffinity: None
-    type: NodePort
+    type: ClusterIP
 
     ## Enable gRPC port on service to allow auto discovery with thanos-querier
     gRPC:
@@ -1210,7 +1210,7 @@ alertmanager:
   enabled: true
 
   persistence:
-    size: 8Gi
+    size: 2Gi
 
   podSecurityContext:
     runAsUser: 65534
