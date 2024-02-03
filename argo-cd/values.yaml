@@ -318,7 +318,7 @@ controller:
   ## Enable if you would like to grant rights to Argo CD to deploy to the local Kubernetes cluster.
   clusterAdminAccess:
     # -- Enable RBAC for local cluster deployments
-    enabled: true
+    enabled: false
 
   ## Enable this and set the rules: to whatever custom rules you want for the Cluster Role resource.
   ## Defaults to off
@@ -1355,7 +1355,7 @@ server:
   ## Enable if you would like to grant rights to Argo CD to deploy to the local Kubernetes cluster.
   clusterAdminAccess:
     # -- Enable RBAC for local cluster deployments
-    enabled: true
+    enabled: false
 
   GKEbackendConfig:
     # -- Enable BackendConfig custom resource for Google Kubernetes Engine
