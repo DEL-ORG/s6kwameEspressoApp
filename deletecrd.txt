@@ -1,0 +1,3 @@
+
+kubectl patch crd applications.argoproj.io -p '{"metadata":{"finalizers":[]}}' --type=merge
+kubectl delete crd applications.argoproj.io
